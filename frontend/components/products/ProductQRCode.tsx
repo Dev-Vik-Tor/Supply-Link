@@ -36,10 +36,10 @@ export default function ProductQRCode({ productId, size = 200 }: ProductQRCodePr
   return (
     <div className="flex flex-col items-center gap-3">
       <canvas ref={canvasRef} aria-label={`QR code for product ${productId}`} />
-      <p className="text-xs text-gray-500 break-all text-center max-w-[200px]">{url}</p>
+      <p className="text-xs text-[var(--muted)] break-all text-center max-w-[200px]">{url}</p>
       <button
         onClick={handleDownload}
-        className="px-4 py-2 text-sm bg-black text-white rounded-md hover:bg-gray-800 transition-colors"
+        className="px-4 py-2 text-sm bg-[var(--primary)] text-[var(--primary-fg)] rounded-md hover:opacity-90 transition-opacity"
       >
         Download QR
       </button>

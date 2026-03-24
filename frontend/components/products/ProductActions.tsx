@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ChangeEvent } from "react";
 
 interface ProductActionsProps {
   productId: string;
@@ -50,21 +50,21 @@ export default function ProductActions({ productId }: ProductActionsProps) {
 
       {open && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-xl p-6 w-full max-w-md shadow-xl">
-            <h2 className="text-lg font-semibold mb-4">{MODAL_CONFIG[open].title}</h2>
+          <div className="bg-[var(--card)] border border-[var(--card-border)] rounded-xl p-6 w-full max-w-md shadow-xl">
+            <h2 className="text-lg font-semibold mb-4 text-[var(--foreground)]">{MODAL_CONFIG[open as NonNullable<ModalType>].title}</h2>
             <textarea
-              className="w-full border rounded-md p-3 text-sm resize-none h-24 focus:outline-none focus:ring-2 focus:ring-black"
-              placeholder={MODAL_CONFIG[open].placeholder}
+              className="w-full border border-[var(--card-border)] bg-[var(--background)] text-[var(--foreground)] rounded-md p-3 text-sm resize-none h-24 focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"
+              placeholder={MODAL_CONFIG[open as NonNullable<ModalType>].placeholder}
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setInput(e.target.value)}
             />
             <div className="flex justify-end gap-3 mt-4">
-              <button onClick={close} className="px-4 py-2 text-sm rounded-md border hover:bg-gray-50">
+              <button onClick={close} className="px-4 py-2 text-sm rounded-md border border-[var(--card-border)] hover:bg-[var(--muted-bg)] text-[var(--foreground)]">
                 Cancel
               </button>
               <button
                 onClick={() => handleSubmit(open)}
-                className="px-4 py-2 text-sm rounded-md bg-black text-white hover:bg-gray-800"
+                className="px-4 py-2 text-sm rounded-md bg-[var(--primary)] text-[var(--primary-fg)] hover:opacity-90"
               >
                 Confirm
               </button>
