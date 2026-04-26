@@ -5,8 +5,12 @@ interface SupplyLinkStore {
   products: Product[];
   events: TrackingEvent[];
   walletAddress: string | null;
+  xlmBalance: string | null;
+  networkMismatch: boolean;
   lastFetched: number | null;
   setWalletAddress: (address: string | null) => void;
+  setXlmBalance: (balance: string | null) => void;
+  setNetworkMismatch: (mismatch: boolean) => void;
   addProduct: (product: Product) => void;
   addEvent: (event: TrackingEvent) => void;
   setProducts: (products: Product[]) => void;
@@ -19,8 +23,12 @@ export const useStore = create<SupplyLinkStore>((set) => ({
   products: [],
   events: [],
   walletAddress: null,
+  xlmBalance: null,
+  networkMismatch: false,
   lastFetched: null,
   setWalletAddress: (address) => set({ walletAddress: address }),
+  setXlmBalance: (balance) => set({ xlmBalance: balance }),
+  setNetworkMismatch: (mismatch) => set({ networkMismatch: mismatch }),
   addProduct: (product) =>
     set((state) => ({ products: [...state.products, product] })),
   addEvent: (event) =>
