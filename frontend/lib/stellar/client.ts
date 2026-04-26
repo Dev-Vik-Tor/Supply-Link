@@ -1,5 +1,5 @@
 import {
-  getPublicKey,
+  getAddress,
   isConnected,
   signTransaction,
 } from "@stellar/freighter-api";
@@ -13,9 +13,10 @@ export class FreighterNotInstalledError extends Error {
 
 export async function getWalletAddress(): Promise<string | null> {
   try {
-    const connected = await isConnected();
-    if (!connected) return null;
-    return await getPublicKey();
+    const result = await isConnected();
+    if (!result.isConnected) return null;
+    const addressResult = await getAddress();
+    return addressResult.address;
   } catch (error) {
     if (
       error instanceof Error &&
@@ -33,7 +34,8 @@ export async function safeSignTransaction(
   transaction: string
 ): Promise<string> {
   try {
-    return await signTransaction(transaction);
+    const result = await signTransaction(transaction);
+    return result.signedTxXdr;
   } catch (error) {
     if (
       error instanceof Error &&
